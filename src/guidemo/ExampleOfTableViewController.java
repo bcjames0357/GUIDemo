@@ -20,8 +20,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 
 /**
@@ -35,7 +37,21 @@ public class ExampleOfTableViewController implements Initializable {
     @FXML private TableColumn<Person, String> firstNameColumn;
     @FXML private TableColumn<Person, String> lastNameColumn;
     @FXML private TableColumn<Person, LocalDate> birthdayColumn;
-
+    
+    public void changeFirstNameCellEvent(CellEditEvent edditedCell)
+    {
+        Person personSelected = tableView.getSelectionModel().getSelectedItem();
+        personSelected.setFirstName(edditedCell.getNewValue().toString());
+        
+    }
+    
+    public void changeLastNameCellEvent(CellEditEvent edditedCell)
+    {
+        Person personSelected = tableView.getSelectionModel().getSelectedItem();
+        personSelected.setLastName(edditedCell.getNewValue().toString());
+        
+    }
+    
     public void changeScreenButtonPushed(ActionEvent event) throws IOException
     {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
@@ -58,6 +74,10 @@ public class ExampleOfTableViewController implements Initializable {
         birthdayColumn.setCellValueFactory(new PropertyValueFactory<Person, LocalDate>("birthday"));
         
         tableView.setItems(getPeople());
+        
+        tableView.setEditable(true);
+        firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }    
     
     public ObservableList<Person> getPeople()
