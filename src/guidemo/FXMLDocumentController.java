@@ -7,14 +7,17 @@ package guidemo;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 
 /**
@@ -40,6 +43,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML private RadioButton cSharpRadioButton;
     @FXML private RadioButton cPlusPlusRadioButton;
     private ToggleGroup favLangToggleGroup;
+    
+    @FXML private ListView listView;
+    @FXML private TextArea golfTextArea; 
     
     public void choiceBoxButtonPushed()
     {
@@ -77,6 +83,23 @@ public class FXMLDocumentController implements Initializable {
             radioButtonLabel.setText("The selected item is PHP");
     }
     
+    public void listViewButtonPushed()
+    {
+        String textAreaString = "";
+        
+        ObservableList listOfItems = listView.getSelectionModel().getSelectedItems();
+        
+        for(Object item : listOfItems)
+        {
+            textAreaString += String.format("%s%n", (String) item);
+        }
+        
+        this.golfTextArea.setText(textAreaString);
+        
+    }
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         pizzaOrderLabel.setText("");
@@ -97,6 +120,9 @@ public class FXMLDocumentController implements Initializable {
         this.phpRadioButton.setToggleGroup(favLangToggleGroup);
         this.javaRadioButton.setToggleGroup(favLangToggleGroup);
         this.cSharpRadioButton.setToggleGroup(favLangToggleGroup);
+        
+        listView.getItems().addAll("Golf Balls","Wedges","Irons","Tees","Driver","Putter");
+        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }    
     
 }

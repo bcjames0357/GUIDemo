@@ -6,16 +6,33 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guidemo.FXMLDocumentController">
    <children>
-      <HBox prefHeight="300.0" prefWidth="600.0">
+      <HBox prefHeight="300.0" prefWidth="800.0">
          <children>
+            <VBox prefHeight="300.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label text="RadioButton Objects">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="phpRadioButton" mnemonicParsing="false" onAction="#radioButtonChanged" text="PHP" />
+                  <RadioButton fx:id="javaRadioButton" mnemonicParsing="false" onAction="#radioButtonChanged" text="Java" />
+                  <RadioButton fx:id="cSharpRadioButton" mnemonicParsing="false" onAction="#radioButtonChanged" text="C#" />
+                  <RadioButton fx:id="cPlusPlusRadioButton" mnemonicParsing="false" onAction="#radioButtonChanged" text="C++" />
+                  <Label fx:id="radioButtonLabel" text="Label" />
+               </children>
+            </VBox>
             <VBox prefHeight="300.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Label text="CheckBox Objects">
@@ -42,35 +59,50 @@
                   <Label fx:id="choiceBoxLabel" text="Label" />
                </children>
             </VBox>
+            <VBox prefHeight="280.0" prefWidth="203.0" spacing="10.0">
+               <children>
+                  <Label text="ComboBox Object">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="comboBox" onAction="#comboBoxWasUpdated" prefWidth="150.0" />
+                  <Label fx:id="comboBoxLabel" lineSpacing="10.0" text="Label" />
+               </children>
+            </VBox>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <VBox layoutX="401.0" layoutY="9.0" prefHeight="300.0" prefWidth="200.0" spacing="10.0">
+      <HBox layoutY="300.0" prefHeight="300.0" prefWidth="800.0" spacing="20.0">
          <children>
-            <Label text="ComboBox Object">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="comboBox" onAction="#comboBoxWasUpdated" prefWidth="150.0" />
-            <Label fx:id="comboBoxLabel" lineSpacing="10.0" text="Label" />
+            <VBox prefHeight="250.0" prefWidth="200.0">
+               <children>
+                  <Label text="ListView Object">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="listView" prefHeight="250.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <StackPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#listViewButtonPushed" text="Selected Gear" />
+               </children>
+            </StackPane>
+            <VBox prefHeight="250.0" prefWidth="200.0">
+               <children>
+                  <Label text="TextArea Object">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="golfTextArea" prefHeight="250.0" prefWidth="200.0" />
+               </children>
+            </VBox>
          </children>
-      </VBox>
-      <VBox layoutX="585.0" layoutY="14.0" prefHeight="300.0" prefWidth="200.0" spacing="10.0">
-         <children>
-            <Label text="RadioButton Objects">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-            </Label>
-            <RadioButton fx:id="phpRadioButton" mnemonicParsing="false" onAction="#radioButtonChanged" text="PHP" />
-            <RadioButton fx:id="javaRadioButton" mnemonicParsing="false" onAction="#radioButtonChanged" text="Java" />
-            <RadioButton fx:id="cSharpRadioButton" mnemonicParsing="false" onAction="#radioButtonChanged" text="C#" />
-            <RadioButton fx:id="cPlusPlusRadioButton" mnemonicParsing="false" onAction="#radioButtonChanged" text="C++" />
-            <Label fx:id="radioButtonLabel" text="Label" />
-         </children>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>
