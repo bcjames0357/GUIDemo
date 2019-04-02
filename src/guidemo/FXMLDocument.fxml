@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guidemo.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@grey_theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guidemo.FXMLDocumentController">
    <children>
       <HBox prefHeight="300.0" prefWidth="800.0">
          <children>
@@ -105,6 +106,18 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Button layoutX="88.0" layoutY="251.0" mnemonicParsing="false" onAction="#changeScreenButtonPushed" text="Go to Table View" />
+                  <Spinner fx:id="gradeSpinner" layoutX="14.0" layoutY="88.0" />
+                  <Label layoutX="14.0" layoutY="64.0" text="Select Grade">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox layoutX="19.0" layoutY="143.0" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#getGradesButtonPushed" text="Get Grade" />
+                        <Label fx:id="gradeLabel" text="Label" />
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
          </children>
