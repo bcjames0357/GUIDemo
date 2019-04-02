@@ -19,9 +19,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
@@ -37,6 +41,12 @@ public class ExampleOfTableViewController implements Initializable {
     @FXML private TableColumn<Person, String> firstNameColumn;
     @FXML private TableColumn<Person, String> lastNameColumn;
     @FXML private TableColumn<Person, LocalDate> birthdayColumn;
+    
+    @FXML private TextField firstNameTextField;
+    @FXML private TextField lastNameTextField;
+    @FXML private DatePicker birthdayDatePicker;
+    
+    @FXML private Button detailedPersonViewButton;
     
     public void changeFirstNameCellEvent(CellEditEvent edditedCell)
     {
@@ -64,6 +74,33 @@ public class ExampleOfTableViewController implements Initializable {
         
     }
     
+    public void userClickedOnTable()
+    {
+        this.detailedPersonViewButton.setDisable(false);
+    }
+    
+    //Method will pass selected Person object to the detailed view
+    public void changeSceneToDetailedPersonView(ActionEvent event) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("PersonView.fxml"));
+        Parent tableViewParent = loader.load();
+        
+        Scene tableViewScene = new Scene(tableViewParent);
+        
+        PersonViewController controller = loader.getController();
+        controller.initData(tableView.getSelectionModel().getSelectedItem());
+        
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(tableViewScene);
+        window.show();
+        
+    }
+    
+    
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -78,7 +115,24 @@ public class ExampleOfTableViewController implements Initializable {
         tableView.setEditable(true);
         firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
+        this.detailedPersonViewButton.setDisable(true);
     }    
+    
+    public void deleteButtonPushed()
+    {
+        ObservableList<Person> selectedRows, allPeople;
+        allPeople = tableView.getItems();
+        
+        selectedRows = tableView.getSelectionModel().getSelectedItems();
+        
+        for (Person person: selectedRows)
+        {
+            allPeople.remove(person);
+        }
+    }
     
     public ObservableList<Person> getPeople()
     {
@@ -88,6 +142,17 @@ public class ExampleOfTableViewController implements Initializable {
         people.add(new Person("Mr.","T",LocalDate.of(1952,Month.MAY, 21)));
         
         return people;        
+    }
+    
+    public void newPersonButtonPushed()
+    {
+        Person newPerson = new Person(firstNameTextField.getText(),
+                                      lastNameTextField.getText(),
+                                      birthdayDatePicker.getValue());
+        
+        //Get all the items from the table  as a list, then add the new person
+        //to the list
+        tableView.getItems().add(newPerson);
     }
     
     
